@@ -1,0 +1,7 @@
+  keytool -genkey -v -keystore C:\Users\RAM\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+
+
+follow 
+https://docs.flutter.dev/deployment/android
+
+this file edited by shubhamjit on 2022, 3th october 
