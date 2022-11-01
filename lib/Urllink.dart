@@ -1,8 +1,12 @@
 class Urllink {
-  static String Main_Link = "https://kkkamya.in/Api";
+  //application/controllers/Api.php
+  static String Main_Link = "https://kkkamya.in/Api/";
 
-  static String Invoice_Link =
-      "https://kkkamya.in/projects/kamya/orders/print_invoice/";
+//Https://kkkamya.in/Api
+//https://kkkamya.in/projects/kamya/Api/Api.php
+// kkkamya.in
+
+  static String Invoice_Link = "https://kkkamya.in/orders/print_invoice/";
 
   static String get_category = Main_Link + "get_category";
   static String get_banner = Main_Link + "get_banner";

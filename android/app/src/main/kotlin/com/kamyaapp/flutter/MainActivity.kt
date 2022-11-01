@@ -1,4 +1,4 @@
-package com.kamyaapp.kamya_app
+package kkkamya.com.flutter
 
 import io.flutter.embedding.android.FlutterActivity
 

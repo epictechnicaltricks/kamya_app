@@ -1103,6 +1103,18 @@ class _checkoutState extends State<checkout> {
             .map<cart_list>((json) => cart_list.fromJson(json))
             .toList();
       });
+
+
+
+//  Fluttertoast.showToast(
+//         msg: "NOW INSIDE GET CART ", // message
+//         toastLength: Toast.LENGTH_LONG, // length
+//         gravity: ToastGravity.CENTER, // location
+//         // duration
+//       );
+
+
+
     }
   }
 

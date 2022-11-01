@@ -22,7 +22,7 @@ import 'home.dart';
 import 'notifications.dart';
 
 class product_detail extends StatefulWidget {
-  String product_id;
+  String product_id = "";
   product_detail(this.product_id);
 
   @override
@@ -87,9 +87,12 @@ class _product_detailState extends State<product_detail> {
     final url = Urllink.get_user_cart;
     String user_id = await prefs.ismember_id();
 
+    String temp = user_id;
+
     http.Response response = await http.post(Uri.parse(url), body: {
       "user_id": user_id,
     });
+
     if (response.statusCode == 200) {
       Navigator.pop(context);
       Map<String, dynamic> datauser = json.decode(response.body);
@@ -99,6 +102,20 @@ class _product_detailState extends State<product_detail> {
             .map<cart_list>((json) => cart_list.fromJson(json))
             .toList();
       });
+
+      // Fluttertoast.showToast(
+      //   msg: "NOW INSIDE GET CART " + temp, // message
+      //   toastLength: Toast.LENGTH_LONG, // length
+      //   gravity: ToastGravity.CENTER, // location
+      //   // duration
+      // );
+    } else {
+      //  Fluttertoast.showToast(
+      //   msg: "NOW out INSIDE GET CART ", // message
+      //   toastLength: Toast.LENGTH_LONG, // length
+      //   gravity: ToastGravity.CENTER, // location
+      //   // duration
+      // );
     }
   }
 
@@ -741,7 +758,7 @@ class _product_detailState extends State<product_detail> {
         padding: const EdgeInsets.only(left: 5, top: 10, right: 5, bottom: 20),
         child: GestureDetector(
           onTap: () {
-            //add_to_cart(selected_varient_id,widget.product_id);
+            add_to_cart(selected_varient_id, widget.product_id);
           },
           child: Container(
             alignment: Alignment.center,
@@ -794,6 +811,13 @@ class _product_detailState extends State<product_detail> {
         padding: const EdgeInsets.only(left: 5, top: 10, right: 5, bottom: 20),
         child: GestureDetector(
           onTap: () {
+            // Fluttertoast.showToast(
+            //     msg: selected_varient_id +"\n\n"+ widget.product_id,  // message
+            //     toastLength: Toast.LENGTH_LONG, // length
+            //     gravity: ToastGravity.BOTTOM,    // location
+
+            // );
+
             add_to_cart(selected_varient_id, widget.product_id);
           },
           child: Container(
@@ -898,6 +922,7 @@ class _product_detailState extends State<product_detail> {
         }
       });
     } else {
+      Fluttertoast.showToast(msg: "error");
       Navigator.pop(context);
     }
   }
@@ -907,6 +932,7 @@ class _product_detailState extends State<product_detail> {
     final url = Urllink.add_cart;
     String user_id = await prefs.ismember_id();
     String qty = _quantityController.text;
+
     http.Response response = await http.post(Uri.parse(url), body: {
       "varient_id": varient_id,
       "product_id": product_id,
@@ -920,17 +946,27 @@ class _product_detailState extends State<product_detail> {
 
       setState(() {
         _showDialog_product(context);
-        /*Fluttertoast.showToast(
-            msg: "Product Added To Cart",
+       
+       
+        Fluttertoast.showToast(
+            msg: "Product Added To Cart\n" +
+                varient_id +
+                "\n" +
+                product_id +
+                "\n" +
+                user_id +
+                "\n" +
+                qty,
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
-            backgroundColor: theme_color.dark_green,
-            textColor: theme_color.black,
-            fontSize: 15.0);*/
+            backgroundColor: Color.fromARGB(255, 5, 170, 60),
+            textColor: Color.fromARGB(255, 255, 255, 255),
+            fontSize: 15.0);
       });
     } else {
       Navigator.pop(context);
     }
+
     get_cart();
   }
 
@@ -1049,7 +1085,7 @@ class _product_detailState extends State<product_detail> {
 
   void _removeQuantity(int index) {
     setState(() {
-      if (int.parse(_quantityController.text) > 0) {
+      if (int.parse(_quantityController.text) > 1) {
         int s = int.parse(_quantityController.text);
         s--;
         _quantityController.text = '$s';
@@ -1076,8 +1112,10 @@ class _product_detailState extends State<product_detail> {
             ),
             actions: <Widget>[
               TextButton(
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                style: TextButton.styleFrom(
+                  primary: Colors.red,
+
+                  // foreground
                 ),
                 child: Text('CANCEL'),
                 onPressed: () {
@@ -1087,9 +1125,9 @@ class _product_detailState extends State<product_detail> {
                 },
               ),
               TextButton(
-                style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.green),
+                style: TextButton.styleFrom(
+                  primary: Colors.green,
+                  onSurface: Colors.red,
                 ),
                 child: Text('OK'),
                 onPressed: () {

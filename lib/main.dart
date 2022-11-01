@@ -99,6 +99,15 @@ class _SplashScreenState extends State<SplashScreen> {
     );
 
     print(isLogin+"-------->"+"isLoginsss");
+
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => AppDrawer(
+    //         child: Home(),
+    //       ),
+    //     ));
+
     if(isLogin=="0")
     {
 
@@ -119,6 +128,8 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ));
     }
+
+    
   }
 
   @override
