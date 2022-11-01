@@ -219,8 +219,6 @@ class _LoginState extends State<Login> {
 
                                       }
 
-                                    
-
                                     else if(num.length<10)
                                     {
                                       Fluttertoast.showToast(
